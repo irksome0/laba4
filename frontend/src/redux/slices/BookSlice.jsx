@@ -19,7 +19,7 @@ const bookSlice = createSlice({
             )      
         },
         getBooks:(state, action)=>{
-            return {...state, data: [...state.data, ...action.payload]}
+            return [...state, ...action.payload]
         }
     }
 })

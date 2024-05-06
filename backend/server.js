@@ -25,14 +25,12 @@ db.connect((err) => {
 app.get('/test', (re,res) =>{
     return res.json(
         [{
-            id: 1000000,
             title: "helo",
-            body: "wassup"
+            author: "wassup"
         },
         {
-            id: 1000000,
             title: "helo",
-            body: "wassup"
+            author: "wassup"
         }]
     );
 })

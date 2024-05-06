@@ -4,6 +4,7 @@ import { addBook } from "../../redux/slices/BookSlice";
 import bookData from "../../data/books.json"
 import "./BookForm.css"
 import createBooksWithId from "../../utils/createBooksWithId";
+import {fetchBooks} from "../../redux/slices/async/fetchBooks"
 export default function BookForm() {
     
     const [title, setTitle] =useState('')
@@ -23,7 +24,23 @@ export default function BookForm() {
             setAuthor('')
             setTitle('')
         }
+
+        const a = e.target[0].value
+        const t = e.target[1].value
+        if(a !== "" && t !== ""){
+            fetch("http://localhost:8081/books",{
+                method:"POST",
+                body: JSON.stringify({title:t, author:a}),
+                headers:{
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+        }
     }
+    const handleGetBooks = () =>{
+        dispatch(fetchBooks())
+    }
+
   return (
     <div className="app-block book-form">
       <h2>ADD a New Book</h2>
@@ -38,6 +55,7 @@ export default function BookForm() {
             </div>
             <button type="submit">Add Book</button>
             <button type="button" onClick={handleRandomClick}>Random Book</button>
+            <button onClick={handleGetBooks}>Get Books</button>
         </form>
     </div>
   );
